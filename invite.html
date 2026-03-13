@@ -6,6 +6,9 @@
 
 <title>Birthday Invitation</title>
 
+<!-- Classy Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 
 body{
@@ -15,26 +18,28 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-font-family:Arial;
+font-family:'Playfair Display', serif;
 background:#f6c7d1;
-
-
 overflow:hidden;
 }
+
+/* background image */
+
 .invite-card{
 position:fixed;
 top:50%;
 left:50%;
- transform:translate(-50%, -50%); 
+transform:translate(-50%, -50%);
 width:100%;
 height:100%;
-object-fit:contain;
+object-fit:cover;
 z-index:-1;
 }
+
 /* envelope */
 
 .envelope{
-font-size:90px;
+font-size:85px;
 cursor:pointer;
 animation:bounce 2s infinite;
 }
@@ -48,19 +53,25 @@ animation:bounce 2s infinite;
 
 .card{
 display:none;
-background:rgba(0,0,0,0.7);
+background:rgba(0,0,0,0.65);
 padding:35px;
 border-radius:20px;
 width:85%;
 max-width:520px;
-line-height:1.7;
+line-height:1.8;
 color:white;
 text-align:center;
- backdrop-filter:blur(5px); 
+backdrop-filter:blur(6px);
 }
 
 h1{
 color:#ffd6e7;
+font-weight:600;
+letter-spacing:1px;
+}
+
+p{
+font-size:16px;
 }
 
 /* confetti */
@@ -81,42 +92,59 @@ animation:fall 4s linear infinite;
 </head>
 
 <body>
+
 <img src="bg2.jpg" class="invite-card">
+
 <div class="envelope" onclick="openInvite()">
 ✉️
 </div>
 
 <div class="card" id="card">
 
-<h1>🎂 Birthday Invitation 🎉</h1>
-
-<p>Dear Tushar,</p>
+<h1>COMING SOON 🎬</h1>
 
 <p>
-Time flies. In a twinkling of an eye, it's my 25th birthday!
+One night.<br>
+One celebration.<br>
+One unforgettable milestone.
 </p>
 
 <p>
-I invite you and your family to my birthday party!
+After 25 years of life, memories, and adventures,<br>
+it's time to celebrate a beautiful new chapter.
 </p>
 
 <p>
-<b>Time:</b> 6:00 p.m.<br>
-<b>Date:</b> 20 April 2026
+And a moment like this deserves the right people —
+<br><b>friends, siblings, and cousins.</b>
 </p>
 
 <p>
-<b>Location:</b><br>
+You’re officially invited to celebrate<br>
+<b>my 25th birthday.</b>
+</p>
+
+<p>
+✨ A night of music, laughter, and memories. ✨
+</p>
+
+<p>
+<b>Date:</b> 20 April 2026<br>
+<b>Time:</b> 6:00 PM
+</p>
+
+<p>
+<b>Location</b><br>
 MILLO 245/U1,<br>
 East High Court Road,<br>
-near Zudio Showroom,<br>
+Near Zudio Showroom,<br>
 Civil Lines, Nagpur,<br>
-Maharashtra, 440001
+Maharashtra – 440001
 </p>
 
 <p>
-Please be at my birthday party<br>
-to bless me and have fun.
+Because this isn’t just a birthday party.<br>
+<b>It’s the beginning of a beautiful new chapter at twenty-five.</b> 🥂
 </p>
 
 </div>
@@ -157,7 +185,4 @@ document.body.appendChild(confetti);
 </script>
 
 </body>
-
 </html>
-
-
