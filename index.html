@@ -161,14 +161,14 @@ setInterval(createHeart,500);
 
 /* SCRATCH CARD */
 
-function createScratchCard(id,link=false){
+function createScratchCard(id,goInvite=false){
 
-let canvas=document.getElementById(id);
-let ctx=canvas.getContext("2d");
+const canvas=document.getElementById(id);
+const ctx=canvas.getContext("2d");
+
 let scratching=false;
 
-
-/* heart shape */
+/* draw red heart */
 
 ctx.fillStyle="red";
 ctx.beginPath();
@@ -177,21 +177,15 @@ ctx.bezierCurveTo(200,120,200,40,100,80);
 ctx.bezierCurveTo(0,40,0,120,100,180);
 ctx.fill();
 
-/* erase mode */
+/* erase while scratching */
 
 ctx.globalCompositeOperation="destination-out";
-
-/* start scratch */
 
 canvas.addEventListener("mousedown",()=>scratching=true);
 canvas.addEventListener("touchstart",()=>scratching=true);
 
-/* stop scratch */
-
-canvas.addEventListener("mouseup",()=>{scratching=false;check();});
-canvas.addEventListener("touchend",()=>{scratching=false;check();});
-
-/* scratching */
+canvas.addEventListener("mouseup",()=>{scratching=false;finish();});
+canvas.addEventListener("touchend",()=>{scratching=false;finish();});
 
 canvas.addEventListener("mousemove",scratch);
 canvas.addEventListener("touchmove",scratch);
@@ -201,6 +195,7 @@ function scratch(e){
 if(!scratching) return;
 
 let rect=canvas.getBoundingClientRect();
+
 let x,y;
 
 if(e.touches){
@@ -212,29 +207,26 @@ y=e.clientY-rect.top;
 }
 
 ctx.beginPath();
-ctx.arc(x,y,20,0,Math.PI*2);
+ctx.arc(x,y,18,0,Math.PI*2);
 ctx.fill();
 
 }
 
-/* check scratched area */
-
-function check(){
+function finish(){
 
 let pixels=ctx.getImageData(0,0,canvas.width,canvas.height);
-let total=pixels.data.length/4;
-let count=0;
+let cleared=0;
 
 for(let i=3;i<pixels.data.length;i+=4){
-if(pixels.data[i]==0) count++;
+if(pixels.data[i]===0) cleared++;
 }
 
-if(count/total>0.4){
+if(cleared/(pixels.data.length/4)>0.35){
 
-if(link){
+if(goInvite){
 window.location.href="invite.html";
 }else{
-showPopup();
+document.getElementById("popup").style.display="flex";
 }
 
 }
@@ -243,28 +235,24 @@ showPopup();
 
 }
 
-/* create both cards */
+
+/* create hearts */
 
 createScratchCard("card1");
 createScratchCard("card2",true);
 
 
-/* popup */
-
-function showPopup(){
-document.getElementById("popup").style.display="flex";
-}
+/* popup controls */
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
 }
 
 </script>
-
-
 </body>
 
 </html>
+
 
 
 
