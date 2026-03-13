@@ -17,7 +17,7 @@ align-items:center;
 flex-direction:column;
 font-family:Arial;
 
-background:#f6c7d1;
+background:transparent;
 overflow:hidden;
 }
 .invite-card{
@@ -117,7 +117,7 @@ font-size:24px;
 </head>
 
 <body>
-<img src="bg1.jpg" class="invite-card">
+<img src="bg2.jpg" class="invite-card">
 <h1>Scratch the Hearts ❤️</h1>
 
 <div class="container">
@@ -167,10 +167,6 @@ let canvas=document.getElementById(id);
 let ctx=canvas.getContext("2d");
 let scratching=false;
 
-/* silver layer */
-
-ctx.fillStyle="#c0c0c0";
-ctx.fillRect(0,0,canvas.width,canvas.height);
 
 /* heart shape */
 
@@ -269,6 +265,7 @@ document.getElementById("popup").style.display="none";
 </body>
 
 </html>
+
 
 
 
