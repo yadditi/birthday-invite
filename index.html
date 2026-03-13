@@ -17,15 +17,16 @@ align-items:center;
 flex-direction:column;
 font-family:Arial;
 
-background:url("bg1.jpg");
-background-size:contain;
-background-position:center;
-background-repeat:no-repeat;
-background-color:#f6c7d1;
-
+background:#f6c7d1;
 overflow:hidden;
 }
-
+.invite-card{
+width:90%;
+max-width:420px;
+height:auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+border-radius:20px;
+}
 h1{
 color:white;
 text-shadow:2px 2px 10px black;
@@ -111,7 +112,7 @@ font-size:24px;
 </head>
 
 <body>
-
+<img src="bg1.jpg" class="invite-card">
 <h1>Scratch the Hearts ❤️</h1>
 
 <div class="container">
@@ -252,3 +253,4 @@ document.getElementById("popup").style.display="none";
 </body>
 
 </html>
+
