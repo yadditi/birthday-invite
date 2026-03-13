@@ -159,7 +159,7 @@ setTimeout(()=>heart.remove(),6000);
 setInterval(createHeart,500);
 
 
-/* SCRATCH CARD FUNCTION */
+/* SCRATCH CARD */
 
 function createScratchCard(id,link=false){
 
@@ -172,7 +172,7 @@ let scratching=false;
 ctx.fillStyle="#c0c0c0";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
-/* draw heart */
+/* heart shape */
 
 ctx.fillStyle="red";
 ctx.beginPath();
@@ -181,19 +181,21 @@ ctx.bezierCurveTo(200,120,200,40,100,80);
 ctx.bezierCurveTo(0,40,0,120,100,180);
 ctx.fill();
 
+/* erase mode */
+
 ctx.globalCompositeOperation="destination-out";
 
-/* start */
+/* start scratch */
 
 canvas.addEventListener("mousedown",()=>scratching=true);
 canvas.addEventListener("touchstart",()=>scratching=true);
 
-/* end */
+/* stop scratch */
 
 canvas.addEventListener("mouseup",()=>{scratching=false;check();});
 canvas.addEventListener("touchend",()=>{scratching=false;check();});
 
-/* scratch */
+/* scratching */
 
 canvas.addEventListener("mousemove",scratch);
 canvas.addEventListener("touchmove",scratch);
@@ -219,7 +221,7 @@ ctx.fill();
 
 }
 
-/* check scratched */
+/* check scratched area */
 
 function check(){
 
@@ -245,7 +247,7 @@ showPopup();
 
 }
 
-/* create two cards */
+/* create both cards */
 
 createScratchCard("card1");
 createScratchCard("card2",true);
@@ -267,6 +269,7 @@ document.getElementById("popup").style.display="none";
 </body>
 
 </html>
+
 
 
 
