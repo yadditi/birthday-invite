@@ -21,11 +21,14 @@ background:#f6c7d1;
 overflow:hidden;
 }
 .invite-card{
-width:90%;
-max-width:420px;
-height:auto;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-border-radius:20px;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:100%;
+height:100%;
+object-fit:contain;
+z-index:-1;
 }
 h1{
 color:white;
@@ -39,6 +42,8 @@ gap:40px;
 margin-top:30px;
 flex-wrap:wrap;
 justify-content:center;
+  z-index:2;
+position:relative;
 }
 
 canvas{
@@ -112,9 +117,9 @@ font-size:24px;
 </head>
 
 <body>
-
-<h1>Scratch the Hearts ❤️</h1>
 <img src="bg1.jpg" class="invite-card">
+<h1>Scratch the Hearts ❤️</h1>
+
 <div class="container">
 <canvas id="card1" width="200" height="200"></canvas>
 <canvas id="card2" width="200" height="200"></canvas>
@@ -133,7 +138,6 @@ font-size:24px;
 
 </div>
 </div>
-
 <script>
 
 /* floating hearts */
@@ -155,14 +159,18 @@ setTimeout(()=>heart.remove(),6000);
 setInterval(createHeart,500);
 
 
-/* scratch cards */
+/* SCRATCH CARD FUNCTION */
 
-function createScratchCard(canvasId, link=false){
+function createScratchCard(id,link=false){
 
-let canvas=document.getElementById(canvasId);
+let canvas=document.getElementById(id);
 let ctx=canvas.getContext("2d");
-
 let scratching=false;
+
+/* silver layer */
+
+ctx.fillStyle="#c0c0c0";
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
 /* draw heart */
 
@@ -237,8 +245,13 @@ showPopup();
 
 }
 
+/* create two cards */
+
 createScratchCard("card1");
 createScratchCard("card2",true);
+
+
+/* popup */
 
 function showPopup(){
 document.getElementById("popup").style.display="flex";
@@ -250,9 +263,11 @@ document.getElementById("popup").style.display="none";
 
 </script>
 
+
 </body>
 
 </html>
+
 
 
 
