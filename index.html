@@ -42,7 +42,7 @@ gap:40px;
 margin-top:30px;
 flex-wrap:wrap;
 justify-content:center;
-  z-index:2;
+  z-index:1;
 position:relative;
 }
 
@@ -63,7 +63,7 @@ background:rgba(0,0,0,0.7);
 display:none;
 justify-content:center;
 align-items:center;
-z-index:10;
+z-index:999;
 }
 
 .message{
@@ -89,9 +89,11 @@ cursor:pointer;
 
 .heart{
 position:absolute;
-color:#ff4d6d;
+color:#ff7a8f;
 font-size:24px;
 animation:float 6s linear infinite;
+  z-index:0;
+  pointer-events:none;
 }
 
 @keyframes float{
@@ -253,6 +255,7 @@ document.getElementById("popup").style.display="none";
 </body>
 
 </html>
+
 
 
 
