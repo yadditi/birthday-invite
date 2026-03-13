@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,26 +11,18 @@
 
 body{
 margin:0;
-min-height:100vh;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 font-family:Arial;
-
-background:transparent;
+background:url("bg1.jpg");
+background-size:cover;
+background-position:center;
 overflow:hidden;
 }
-.invite-card{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-height:100vh;
-width:auto;
-z-index:-5;
-pointer-events:none;
-}
+
 h1{
 color:white;
 text-shadow:2px 2px 10px black;
@@ -42,8 +35,6 @@ gap:40px;
 margin-top:30px;
 flex-wrap:wrap;
 justify-content:center;
-  z-index:1;
-position:relative;
 }
 
 canvas{
@@ -63,7 +54,6 @@ background:rgba(0,0,0,0.7);
 display:none;
 justify-content:center;
 align-items:center;
-z-index:999;
 }
 
 .message{
@@ -73,8 +63,6 @@ border-radius:15px;
 text-align:center;
 width:80%;
 max-width:300px;
-  z-index:1000;
-  position:relative;
 }
 
 button{
@@ -91,11 +79,9 @@ cursor:pointer;
 
 .heart{
 position:absolute;
-color:#ff7a8f;
+color:#ff4d6d;
 font-size:24px;
 animation:float 6s linear infinite;
-  z-index:0;
-  pointer-events:none;
 }
 
 @keyframes float{
@@ -122,7 +108,7 @@ font-size:24px;
 </head>
 
 <body>
-<img src="bg2.jpg" class="invite-card">
+
 <h1>Scratch the Hearts ❤️</h1>
 
 <div class="container">
@@ -143,6 +129,7 @@ font-size:24px;
 
 </div>
 </div>
+
 <script>
 
 /* floating hearts */
@@ -164,33 +151,37 @@ setTimeout(()=>heart.remove(),6000);
 setInterval(createHeart,500);
 
 
-/* SCRATCH CARD */
+/* scratch cards */
 
-function createScratchCard(id,goInvite=false){
+function createScratchCard(canvasId, link=false){
 
-const canvas=document.getElementById(id);
-const ctx=canvas.getContext("2d");
+let canvas=document.getElementById(canvasId);
+let ctx=canvas.getContext("2d");
 
 let scratching=false;
 
-/* draw red heart */
+/* draw heart */
 
-ctx.fillStyle="#ff4d6d";
+ctx.fillStyle="red";
 ctx.beginPath();
 ctx.moveTo(100,180);
 ctx.bezierCurveTo(200,120,200,40,100,80);
 ctx.bezierCurveTo(0,40,0,120,100,180);
 ctx.fill();
 
-/* erase while scratching */
-
 ctx.globalCompositeOperation="destination-out";
+
+/* start */
 
 canvas.addEventListener("mousedown",()=>scratching=true);
 canvas.addEventListener("touchstart",()=>scratching=true);
 
-canvas.addEventListener("mouseup",()=>{scratching=false;finish();});
-canvas.addEventListener("touchend",()=>{scratching=false;finish();});
+/* end */
+
+canvas.addEventListener("mouseup",()=>{scratching=false;check();});
+canvas.addEventListener("touchend",()=>{scratching=false;check();});
+
+/* scratch */
 
 canvas.addEventListener("mousemove",scratch);
 canvas.addEventListener("touchmove",scratch);
@@ -200,7 +191,6 @@ function scratch(e){
 if(!scratching) return;
 
 let rect=canvas.getBoundingClientRect();
-
 let x,y;
 
 if(e.touches){
@@ -212,26 +202,29 @@ y=e.clientY-rect.top;
 }
 
 ctx.beginPath();
-ctx.arc(x,y,18,0,Math.PI*2);
+ctx.arc(x,y,20,0,Math.PI*2);
 ctx.fill();
 
 }
 
-function finish(){
+/* check scratched */
+
+function check(){
 
 let pixels=ctx.getImageData(0,0,canvas.width,canvas.height);
-let cleared=0;
+let total=pixels.data.length/4;
+let count=0;
 
 for(let i=3;i<pixels.data.length;i+=4){
-if(pixels.data[i]===0) cleared++;
+if(pixels.data[i]==0) count++;
 }
 
-if(cleared/(pixels.data.length/4)>0.35){
+if(count/total>0.4){
 
-if(goInvite){
+if(link){
 window.location.href="invite.html";
 }else{
-document.getElementById("popup").style.display="flex";
+showPopup();
 }
 
 }
@@ -239,30 +232,19 @@ document.getElementById("popup").style.display="flex";
 }
 
 }
-
-
-/* create hearts */
 
 createScratchCard("card1");
 createScratchCard("card2",true);
 
-
-/* popup controls */
+function showPopup(){
+document.getElementById("popup").style.display="flex";
+}
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
 }
 
 </script>
+
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
