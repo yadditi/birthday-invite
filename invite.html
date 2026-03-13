@@ -16,16 +16,18 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 font-family:Arial;
+background:#f6c7d1;
 
-background:url("bg2.jpg");
-background-size:contain;
-background-position:center;
-background-repeat:no-repeat;
-background-color:#f6c7d1;
 
 overflow:hidden;
 }
-
+.invite-card{
+width:90%;
+max-width:420px;
+height:auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+border-radius:20px;
+}
 /* envelope */
 
 .envelope{
@@ -75,7 +77,7 @@ animation:fall 4s linear infinite;
 </head>
 
 <body>
-
+<img src="bg2.jpg" class="invite-card">
 <div class="envelope" onclick="openInvite()">
 ✉️
 </div>
@@ -153,3 +155,4 @@ document.body.appendChild(confetti);
 </body>
 
 </html>
+
